@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Productivity Compass</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    #needle {
+      transition: transform 0.5s ease;
+      transform-origin: center bottom;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 flex flex-col items-center justify-center min-h-screen px-4">
+
+  <h1 class="text-2xl font-bold mb-6">Focus Compass</h1>
+
+  <div class="relative w-64 h-64 bg-white rounded-full shadow-md flex items-center justify-center border border-gray-300">
+    <div id="needle" class="absolute w-1 h-28 bg-red-500 bottom-1/2 left-1/2 transform -translate-x-1/2"></div>
+    <div class="absolute top-4 left-1/2 transform -translate-x-1/2 text-xs text-gray-500">Learn</div>
+    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-xs text-gray-500">Deep Work</div>
+    <div class="absolute left-4 top-1/2 transform -translate-y-1/2 text-xs text-gray-500">Admin</div>
+    <div class="absolute right-4 top-1/2 transform -translate-y-1/2 text-xs text-gray-500">Break</div>
+  </div>
+
+  <button onclick="rotateNeedle()" class="mt-6 px-4 py-2 bg-blue-500 text-white rounded">Next Focus</button>
+
+  <p id="focusText" class="mt-4 text-lg text-gray-700"></p>
+
+  <script>
+    const directions = ['Learn', 'Break', 'Deep Work', 'Admin'];
+    const angles = [0, 90, 180, 270];
+    let currentIndex = 0;
+
+    function rotateNeedle() {
+      currentIndex = (currentIndex + 1) % directions.length;
+      const needle = document.getElementById('needle');
+      needle.style.transform = `rotate(${angles[currentIndex]}deg) translateX(-50%)`;
+      document.getElementById('focusText').textContent = `Current Focus: ${directions[currentIndex]}`;
+    }
+
+    // Initial set
+    rotateNeedle();
+  </script>
+
+</body>
+</html>
